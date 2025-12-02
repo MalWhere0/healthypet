@@ -243,7 +243,7 @@
             justify-content: center;
             gap: 0.4rem;
             border-radius: 999px;
-            border: none;
+            border: 2px solid transparent; /* sichtbare Umrandung für Kontrast */
             cursor: pointer;
             font-size: 0.94rem;
             padding: 0.65rem 1.3rem;
@@ -251,20 +251,25 @@
             text-decoration: none;
         }
 
-        .btn-primary {
-            background: var(--color-primary);
-            color: #ffffff;
-            box-shadow: var(--shadow-soft);
-        }
+
+      .btn-primary {
+          background: var(--color-primary);
+          color: #ffffff;
+          box-shadow: var(--shadow-soft);
+          border-color: #0f766e; /* dunkler Rand, klarer Kontrast zum Hintergrund */
+      }
+
 
         .btn-primary:hover {
             background: var(--color-primary-dark);
         }
 
         .btn-secondary {
-            background: #e5e7eb;
+            background: #d1d5db;       /* etwas dunkler als vorher */
             color: #111827;
+            border-color: #4b5563;     /* deutlich kontrastierender Rand */
         }
+
 
         .btn-secondary:hover {
             background: #d1d5db;
@@ -536,7 +541,7 @@
             width: 100%;
             padding: 0.6rem 0.7rem;
             border-radius: 0.6rem;
-            border: 1px solid #d1d5db;
+            border: 2px solid #4b5563;
             font: inherit;
         }
 
@@ -675,7 +680,8 @@
     </style>
 </head>
 <body>
-<a href="#main" class="skip-link">Zum Inhalt springen</a>
+<a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
+
 
 <header>
     <div class="nav-container">
@@ -710,7 +716,8 @@
     </div>
 </header>
 
-<main id="main" tabindex="-1">
+<main id="main" tabindex="-1" role="main">
+
     <!-- Start / Webshop / Aufgabe 0 -->
     <section id="home" class="section" aria-labelledby="home-heading">
         <div class="container">
@@ -752,10 +759,10 @@
                     </div>
                 </div>
 
-                <aside class="hero-card" aria-label="Zusammenfassung des Softwareprodukts als Kachel">
-                    <div class="hero-card-inner">
-                        <span class="pill" aria-hidden="true">⚖️ Daten- und Informatikrecht – Übungsbeispiel</span>
-                        <h2>Das Produkt für die Übung</h2>
+                <aside class="hero-card" aria-labelledby="hero-card-heading">
+                  <div class="hero-card-inner">
+                      <span class="pill" aria-hidden="true">⚖️ Daten und Informatikrecht – Übungsbeispiel</span>
+                      <h2 id="hero-card-heading">Das Produkt für die Übung</h2>
                         <p style="font-size:0.9rem;">
                             Dieses Webprojekt erfüllt exemplarisch die Anforderungen an
                             Barrierefreiheit, Urheberrecht, Markenrecht, Lizenz, Datenschutz,
@@ -1025,7 +1032,7 @@
                         <figcaption style="font-size:0.86rem;margin-bottom:0.35rem;">
                             Klangmarke (Jingle) – Beispiel-Audio:
                         </figcaption>
-                        <audio controls aria-label="Beispiel für die HealthyPet Klangmarke (Jingle)">
+                        <audio controls>
                             <source src="media/healthypet-jingle.ogg" type="audio/ogg" />
                             <source src="media/healthypet-jingle.mp3" type="audio/mpeg" />
                             Ihr Browser unterstützt das Abspielen von Audio-Dateien nicht.
