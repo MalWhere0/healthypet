@@ -764,6 +764,34 @@
           }
         }
 
+        /* === WCAG AA: höherer Kontrast für "Übersicht der Verarbeitungsvorgänge" === */
+        .table-privacy {
+          background: #ffffff;
+        }
+
+        .table-privacy th {
+          background: #0f172a;   /* sehr dunkel */
+          color: #ffffff;        /* sehr hell */
+          border-color: #334155; /* klarer als #e5e7eb */
+        }
+
+        .table-privacy td {
+          color: #0f172a;        /* überschreibt .legal-text { color: var(--color-muted) } */
+          background: #ffffff;   /* verhindert "durchscheinend" auf .card-muted */
+          border-color: #cbd5e1; /* etwas kräftiger für bessere Kanten */
+        }
+
+        /* dezente Zebra-Optik für bessere Lesbarkeit */
+        .table-privacy tbody tr:nth-child(even) td {
+          background: #f8fafc;
+        }
+
+        /* optional: Hover-Hervorhebung */
+        .table-privacy tbody tr:hover td {
+          background: #eef2ff;
+        }
+
+
 
 
     </style>
@@ -1584,7 +1612,8 @@
 
         <h3>5. Übersicht der Verarbeitungsvorgänge</h3>
           <div class="card card-muted" style="padding:1rem;">
-            <table class="table" aria-label="Übersicht Verarbeitungsvorgänge">
+            <table class="table table-privacy" aria-label="Übersicht Verarbeitungsvorgänge">
+
               <thead>
                 <tr>
                   <th>Vorgang</th>
