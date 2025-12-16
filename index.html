@@ -677,6 +677,95 @@
                 padding-inline: 1rem;
             }
         }
+        /* === Aufgabe 3 Ergänzungen: Marken-Assets & Tabellenlayout === */
+        .brand-assets {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .brand-svg {
+            width: 120px;
+            height: 120px;
+            flex: 0 0 auto;
+            border-radius: 1rem;
+            background: #ffffff;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+        }
+
+        .brand-note {
+            font-size: 0.86rem;
+            color: var(--color-muted);
+            margin-top: 0.5rem;
+        }
+
+        .table-compact td,
+        .table-compact th {
+            padding: 0.35rem 0.5rem;
+        }
+
+        kbd {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.85em;
+            padding: 0.1rem 0.35rem;
+            border: 1px solid #d1d5db;
+            border-bottom-width: 2px;
+            border-radius: 0.4rem;
+            background: #f9fafb;
+        }
+        /* === Header-Logo: SVG statt Emoji === */
+        .logo-icon {
+            background: none;     /* SVG hat eigenes Signet */
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .logo-icon svg {
+            width: 36px;
+            height: 36px;
+            display: block;
+        }
+
+        /* === Hero: Medienleiste (2 Fotos + 1 Video) === */
+        .hero-media-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 0.9rem;
+          margin: 1rem 0 1.25rem;
+        }
+
+        .hero-media-item {
+          background: #ffffff;
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-soft);
+          overflow: hidden;
+        }
+
+        .hero-media-item img,
+        .hero-media-item video {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .hero-media-item figcaption {
+          padding: 0.6rem 0.8rem;
+          font-size: 0.78rem;
+          color: var(--color-muted);
+        }
+
+        @media (max-width: 900px) {
+          .hero-media-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -686,9 +775,43 @@
 <header>
     <div class="nav-container">
         <div class="brand">
-            <div class="logo-icon" aria-hidden="true">
-                <span>🐾</span>
-            </div>
+          <div class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 128 128" focusable="false" aria-hidden="true">
+                <defs>
+                    <radialGradient id="hpGradHeader" cx="35%" cy="30%" r="75%">
+                        <stop offset="0%" stop-color="#a7f3d0"></stop>
+                        <stop offset="60%" stop-color="#0f766e"></stop>
+                        <stop offset="100%" stop-color="#115e59"></stop>
+                    </radialGradient>
+                </defs>
+
+                <!-- Hintergrund-Signet -->
+                <circle cx="64" cy="64" r="54" fill="url(#hpGradHeader)"></circle>
+                <circle cx="64" cy="64" r="54" fill="none" stroke="#0f172a" stroke-opacity="0.18" stroke-width="2"></circle>
+
+                <!-- Pfote (abstrakt) -->
+                <g fill="#ffffff" fill-opacity="0.92">
+                    <ellipse cx="44" cy="50" rx="8" ry="10"></ellipse>
+                    <ellipse cx="58" cy="44" rx="8" ry="10"></ellipse>
+                    <ellipse cx="72" cy="44" rx="8" ry="10"></ellipse>
+                    <ellipse cx="86" cy="50" rx="8" ry="10"></ellipse>
+                    <path d="M64 60
+                             C52 60, 44 70, 44 82
+                             C44 92, 52 100, 64 100
+                             C76 100, 84 92, 84 82
+                             C84 70, 76 60, 64 60 Z"></path>
+                </g>
+
+                <!-- Pluszeichen (Gesundheit) -->
+                <g>
+                    <circle cx="92" cy="88" r="16" fill="#0f172a" fill-opacity="0.18"></circle>
+                    <circle cx="92" cy="88" r="14" fill="#ecfeff" fill-opacity="0.95"></circle>
+                    <rect x="90" y="80" width="4" height="16" rx="2" fill="#0f766e"></rect>
+                    <rect x="84" y="86" width="16" height="4" rx="2" fill="#0f766e"></rect>
+                </g>
+            </svg>
+          </div>
+
             <div class="brand-text">
                 <strong>HealthyPet</strong>
                 <small>KI für Tiergesundheit – Demo</small>
@@ -723,7 +846,7 @@
         <div class="container">
             <div class="hero">
                 <div>
-                    <div class="hero-highlight">Demo-Webshop · Abo-Modell wie bei ChatGPT / OpenAI</div>
+                    <div class="hero-highlight">Demo-Webshop · Abo-Modell</div>
                     <h1 id="home-heading">HealthyPet – Ihre KI-Assistenz für Tiergesundheit</h1>
                     <p class="hero-lead">
                         HealthyPet ist eine webbasierte Software, mit der Tierhalter
@@ -733,6 +856,50 @@
                         Medikamenten, Dosierungen und Vorlagen für Rezepte.
                         <strong>HealthyPet ersetzt keinen Tierarzt, sondern unterstützt in Alltagssituationen.</strong>
                     </p>
+                    <div class="hero-media-grid" role="group" aria-label="Beispielmedien: glückliche Haustiere">
+                      <figure class="hero-media-item" style="margin:0;">
+                        <img
+                          src="https://commons.wikimedia.org/wiki/Special:FilePath/Happy_dog_at_Anjuna_Beach_%28Unsplash%29.jpg?width=900"
+                          alt="Glücklicher Hund am Strand bei warmem Licht."
+                          loading="eager"
+                          decoding="async"
+                        />
+                        <figcaption>
+                          Foto (CC0): Samantha Scholl (Unsplash) –
+                          <a href="https://commons.wikimedia.org/wiki/File:Happy_dog_at_Anjuna_Beach_(Unsplash).jpg"
+                             target="_blank" rel="license noopener noreferrer">Wikimedia Commons</a>
+                        </figcaption>
+                      </figure>
+
+                      <figure class="hero-media-item" style="margin:0;">
+                        <img
+                          src="https://commons.wikimedia.org/wiki/Special:FilePath/Cat_greeting_its_owner_%28Unsplash%29.jpg?width=900"
+                          alt="Katze blickt nach oben und wirkt neugierig und zufrieden."
+                          loading="eager"
+                          decoding="async"
+                        />
+                        <figcaption>
+                          Foto (CC0): Ella Jardim (Unsplash) –
+                          <a href="https://commons.wikimedia.org/wiki/File:Cat_greeting_its_owner_(Unsplash).jpg"
+                             target="_blank" rel="license noopener noreferrer">Wikimedia Commons</a>
+                        </figcaption>
+                      </figure>
+
+                      <figure class="hero-media-item" style="margin:0;">
+                        <video controls playsinline preload="metadata" aria-label="Video: spielende Welpen">
+                          <source
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
+                            type="video/webm"
+                          />
+                          Ihr Browser unterstützt das Video-Element nicht.
+                        </video>
+                        <figcaption>
+                          Video (CC BY-SA 3.0): Tim Sweet –
+                          <a href="https://commons.wikimedia.org/wiki/File:Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
+                             target="_blank" rel="license noopener noreferrer">Wikimedia Commons</a>
+                        </figcaption>
+                      </figure>
+                    </div>
 
                     <div class="hero-actions">
                         <button class="btn btn-primary" data-mock="order">
@@ -938,6 +1105,7 @@
     </section>
 
     <!-- About us / Marken / Aufgabe 3 -->
+    <!-- About us / Marken / Aufgabe 3 -->
     <section id="about" class="section" aria-labelledby="about-heading">
         <div class="container">
             <div class="section-header">
@@ -953,7 +1121,8 @@
 
             <div class="two-column">
                 <div class="info-box">
-                    <h3>Unsere Markenformen</h3>
+                    <h3>Unsere Markenformen (3 unterschiedliche Markenformen)</h3>
+
                     <ul class="brand-list">
                         <li>
                             <span class="brand-label">1. Wortmarke „HealthyPet“</span><br />
@@ -962,419 +1131,632 @@
                             von E-Mails. Der Name kombiniert „healthy“ und „pet“ und bringt
                             damit die Kernidee zum Ausdruck: gesunde Haustiere.
                         </li>
+
                         <li>
-                            <span class="brand-label">2. Bildmarke (Pfote + Kreuz)</span><br />
-                            Ein kreisrundes Icon mit einer stilisierten Pfote, kombiniert
-                            mit einem Kreuz aus der medizinischen Symbolik. Die Farben
-                            orientieren sich an Grün- und Türkistönen, die für
-                            Tiergesundheit, Natur und Vertrauen stehen.
+                            <span class="brand-label">2. Bildmarke (eigene Gestaltung: Pfote + Plus)</span><br />
+                            Eine stilisierte Pfote kombiniert mit einem <strong>Plus</strong> als
+                            Gesundheits-Symbol.
+                            <div class="brand-assets" role="group" aria-label="Vorschau der Bildmarke">
+                                <figure style="margin:0;">
+                                    <!-- Inline-SVG = tatsächliche Bildmarke, direkt auf der Seite sichtbar -->
+                                    <svg class="brand-svg" viewBox="0 0 128 128" role="img" aria-labelledby="hp-logo-title hp-logo-desc">
+                                        <title id="hp-logo-title">HealthyPet Bildmarke</title>
+                                        <desc id="hp-logo-desc">Stilisierte Pfote mit Pluszeichen in einem runden Signet, in Türkis- und Grüntönen.</desc>
+
+                                        <!-- Hintergrund-Signet -->
+                                        <defs>
+                                            <radialGradient id="hpGrad" cx="35%" cy="30%" r="75%">
+                                                <stop offset="0%" stop-color="#a7f3d0"></stop>
+                                                <stop offset="60%" stop-color="#0f766e"></stop>
+                                                <stop offset="100%" stop-color="#115e59"></stop>
+                                            </radialGradient>
+                                        </defs>
+                                        <circle cx="64" cy="64" r="54" fill="url(#hpGrad)"></circle>
+                                        <circle cx="64" cy="64" r="54" fill="none" stroke="#0f172a" stroke-opacity="0.18" stroke-width="2"></circle>
+
+                                        <!-- Pfote (abstrakt) -->
+                                        <g fill="#ffffff" fill-opacity="0.92">
+                                            <ellipse cx="44" cy="50" rx="8" ry="10"></ellipse>
+                                            <ellipse cx="58" cy="44" rx="8" ry="10"></ellipse>
+                                            <ellipse cx="72" cy="44" rx="8" ry="10"></ellipse>
+                                            <ellipse cx="86" cy="50" rx="8" ry="10"></ellipse>
+                                            <path d="M64 60
+                                                     C52 60, 44 70, 44 82
+                                                     C44 92, 52 100, 64 100
+                                                     C76 100, 84 92, 84 82
+                                                     C84 70, 76 60, 64 60 Z"></path>
+                                        </g>
+
+                                        <!-- Pluszeichen (Gesundheit) -->
+                                        <g>
+                                            <circle cx="92" cy="88" r="16" fill="#0f172a" fill-opacity="0.18"></circle>
+                                            <circle cx="92" cy="88" r="14" fill="#ecfeff" fill-opacity="0.95"></circle>
+                                            <rect x="90" y="80" width="4" height="16" rx="2" fill="#0f766e"></rect>
+                                            <rect x="84" y="86" width="16" height="4" rx="2" fill="#0f766e"></rect>
+                                        </g>
+                                    </svg>
+
+                                </figure>
+                            </div>
                         </li>
+
                         <li>
-                            <span class="brand-label">3. Klangmarke (Jingle)</span><br />
-                            Ein kurzer, freundlicher, aufsteigender Dreiton-Jingle, der
-                            an das Öffnen einer App erinnert. Er signalisiert
-                            Zuverlässigkeit und einen positiven Ausgang für Tier und
-                            Halter:in.
+                          <span class="brand-label">3. Klangmarke (Jingle)</span><br />
+                          Ein kurzer, freundlicher, glockenartiger Jingle: Er beginnt mit einem klaren Grundton,
+                          steigt in einer kurzen Tonfolge hörbar an und endet in einem stabilen Dur-Schlussklang –
+                          wie eine „App geöffnet“-Bestätigung. Er vermittelt Zuverlässigkeit und einen positiven
+                          Ausgang für Tier und Halter:in.
                         </li>
+
+
                     </ul>
 
-                    <p class="nice-classes">
-                        <strong>Nizza-Klassen (geplante Einordnung der Marken):</strong><br />
-                        Klasse 9 – Software, herunterladbare und cloud-basierte Anwendungen<br />
-                        Klasse 42 – Software-as-a-Service (SaaS), Bereitstellung von
-                        Online-Software<br />
-                        Klasse 44 – Tiermedizinische Informationen und Beratungsangebote
-                        (rein informativ, keine echte Fernbehandlung)
-                    </p>
-
-                    <div class="highlight-box">
-                        <p style="margin:0;">
-                            <strong>Markenrechtlicher Hinweis:</strong> Für diese Übung wird
-                            angenommen, dass „HealthyPet“ und die beschriebenen Logos/
-                            Klänge keine bestehenden Markenrechte verletzen. In der
-                            Realität wären vorab systematische Recherchen (z.&nbsp;B. bei
-                            EUIPO, WIPO, nationalen Markenämtern) erforderlich.
-                        </p>
+                    <h3 style="margin-top:1.25rem;">Nizza-Klassen (Zuordnung)</h3>
+                    <div class="card card-muted" style="padding:1rem;">
+                        <table class="table table-compact" aria-label="Nizza-Klassen Zuordnung">
+                            <thead>
+                                <tr>
+                                    <th>Marke/Zeichen</th>
+                                    <th>Klasse</th>
+                                    <th>Begründung (kurz)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>„HealthyPet“ (Wortmarke)</td>
+                                    <td>42</td>
+                                    <td>SaaS: Bereitstellung der Online-Software / Web-App</td>
+                                    <td><strong>Kern</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Bildmarke (Pfote + Plus)</td>
+                                    <td>42</td>
+                                    <td>Marke für den SaaS-Dienst (Online-Software)</td>
+                                    <td><strong>Kern</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Klangmarke (Jingle)</td>
+                                    <td>42</td>
+                                    <td>Markenkennzeichnung im Zusammenhang mit dem Online-Dienst</td>
+                                    <td><strong>Kern</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Optional: veterinärbezogene Service-Positionierung</td>
+                                    <td>44</td>
+                                    <td>Nur falls als eigenständige Dienstleistung „veterinärbezogene Informations-/Beratungsservices“ vermarktet werden</td>
+                                    <td><strong>Optional</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
 
                 <div class="info-box">
                     <h3>Markenerscheinung &amp; Gestaltung</h3>
                     <ul>
                         <li>
-                            <strong>Wortwahl:</strong> Bewusst beschreibend, aber nicht
-                            täuschend. Keine Begriffe, die echte Tierarztpraxis oder
-                            Notdienste imitieren.
+                            <strong>Wortwahl:</strong> Keine Begriffe, die eine echte Tierarztpraxis,
+                            Behörde, Notdienst oder amtliche Stelle imitieren. Klare Abgrenzung als Software/Informationsdienst.
                         </li>
                         <li>
-                            <strong>Bildwahl:</strong> Abstrakte Pfote und Kreuz, keine
-                            geschützten Bildzeichen oder Logos von Kliniken, Kassen etc.
+                            <strong>Bildwahl:</strong> Abstrakte Pfote + <strong>Plus</strong> (nicht „Rotes Kreuz“),
+                            keine Übernahme fremder Logos, keine Bildzeichen von Kliniken/Versicherern.
                         </li>
                         <li>
-                            <strong>Farbwahl:</strong> Grün/Türkis als Farben für
-                            Gesundheit, kombiniert mit ruhigen Dunkelblau-Tönen für
-                            Seriosität.
+                            <strong>Farbwahl:</strong> Grün/Türkis für Gesundheit/Natur/Vertrauen, kombiniert mit Dunkelblau
+                            für Seriosität; keine Rot-auf-Weiß-Signale, die Schutzzeichen nahekommen könnten.
                         </li>
                         <li>
-                            <strong>Positionswahl:</strong> Logo immer klar als Marke des
-                            Software-Anbieters gekennzeichnet, nicht als Ersatz für
-                            Tierärzte oder Behörden.
+                            <strong>Positionswahl:</strong> Logo als Marke des Software-Anbieters;
+                            keine Gestaltung, die wie eine medizinische Zertifizierung wirkt.
                         </li>
                         <li>
-                            <strong>Formwahl:</strong> Runde, weiche Formen sollen
-                            Vertrauen ausstrahlen. Keine Ähnlichkeit mit bekannten Marken,
-                            insbesondere von Versicherungen, Tierfutterherstellern oder
-                            Klinikketten.
+                            <strong>Formwahl:</strong> Runde, weiche Formen; klare Unterscheidbarkeit zu bekannten Marken
+                            durch eigenständiges SVG und konsistente Typografie.
                         </li>
                     </ul>
 
                     <figure>
-                        <figcaption style="font-size:0.86rem;margin-bottom:0.35rem;">
-                            Klangmarke (Jingle) – Beispiel-Audio:
-                        </figcaption>
-                        <audio controls>
-                            <source src="media/healthypet-jingle.ogg" type="audio/ogg" />
-                            <source src="media/healthypet-jingle.mp3" type="audio/mpeg" />
-                            Ihr Browser unterstützt das Abspielen von Audio-Dateien nicht.
-                        </audio>
-                        <p class="form-hint">
-                            In dieser Übung wird angenommen, dass der Jingle von HealthyPet
-                            selbst komponiert wurde. Die Verwertungsrechte liegen damit
-                            vollständig beim Unternehmen.
-                        </p>
+                      <figcaption style="font-size:0.86rem;margin-bottom:0.35rem;">
+                        Klangmarke (Jingle) – wird im Browser generiert:
+                      </figcaption>
+
+                      <button id="makeJingle" type="button">Jingle erzeugen</button>
+                      <audio id="jinglePlayer" controls aria-label="HealthyPet Klangmarke Jingle"></audio>
                     </figure>
+
+                    <script>
+                    (() => {
+                      const BPM = 140;
+                      const beat = 60 / BPM;
+
+                      // Variante 1 (die ich dir gebaut habe): A4 C#5 D#5 E5 | C#5 | B4 A4 | E5 | A-Dur-Akkord
+                      const SEQ = [
+                        { notes: ["A4"],  beats: 0.5 },
+                        { notes: ["C#5"], beats: 0.5 },
+                        { notes: ["D#5"], beats: 0.5 },
+                        { notes: ["E5"],  beats: 0.5 },
+                        { notes: ["C#5"], beats: 1.0 },
+                        { notes: ["B4"],  beats: 0.5 },
+                        { notes: ["A4"],  beats: 0.5 },
+                        { notes: ["E5"],  beats: 1.0 },
+                        { notes: ["A5","C#6","E6"], beats: 2.0 }
+                      ];
+
+                      function noteToFreq(note) {
+                        // z.B. "C#5"
+                        const m = note.match(/^([A-G])([#b]?)(\d)$/);
+                        const letter = m[1], acc = m[2], oct = parseInt(m[3], 10);
+                        const base = {C:0,D:2,E:4,F:5,G:7,A:9,B:11}[letter];
+                        const accidental = acc === "#" ? 1 : acc === "b" ? -1 : 0;
+                        const midi = 12 * (oct + 1) + base + accidental;
+                        return 440 * Math.pow(2, (midi - 69) / 12);
+                      }
+
+                      function addBell(ctx, when, freq, dur, out, revIn, vel=0.9) {
+                        const g = ctx.createGain();
+                        g.gain.setValueAtTime(0.0001, when);
+                        g.gain.linearRampToValueAtTime(vel, when + 0.01);
+                        g.gain.linearRampToValueAtTime(vel * 0.25, when + 0.06);
+                        g.gain.setValueAtTime(vel * 0.25, Math.max(when + 0.06, when + dur - 0.08));
+                        g.gain.linearRampToValueAtTime(0.0001, when + dur);
+
+                        g.connect(out);
+                        g.connect(revIn);
+
+                        const partials = [
+                          [1.00, 1.00],
+                          [2.01, 0.55],
+                          [2.98, 0.35],
+                          [4.10, 0.20],
+                          [5.43, 0.12],
+                        ];
+
+                        partials.forEach(([ratio, amp]) => {
+                          const o = ctx.createOscillator();
+                          const og = ctx.createGain();
+                          o.type = "sine";
+                          o.frequency.setValueAtTime(freq * ratio, when);
+
+                          og.gain.setValueAtTime(amp, when);
+                          og.gain.exponentialRampToValueAtTime(0.0001, when + dur);
+
+                          o.connect(og).connect(g);
+                          o.start(when);
+                          o.stop(when + dur);
+                        });
+                      }
+
+                      function addPad(ctx, when, freq, dur, out, revIn) {
+                        const g = ctx.createGain();
+                        g.gain.setValueAtTime(0.0001, when);
+                        g.gain.linearRampToValueAtTime(0.18, when + 0.05);
+                        g.gain.setValueAtTime(0.12, when + dur - 0.08);
+                        g.gain.linearRampToValueAtTime(0.0001, when + dur);
+
+                        g.connect(out);
+                        g.connect(revIn);
+
+                        const det = 0.007; // 0.7%
+                        ["sine","sine"].forEach((t, i) => {
+                          const o = ctx.createOscillator();
+                          o.type = t;
+                          const mult = i === 0 ? (1 - det) : (1 + det);
+                          o.frequency.setValueAtTime(freq * mult, when);
+                          o.connect(g);
+                          o.start(when);
+                          o.stop(when + dur);
+                        });
+                      }
+
+                      function makeSimpleReverb(ctx) {
+                        // einfache Echo-Taps als "Pseudo-Reverb"
+                        const inNode = ctx.createGain();
+                        const sum = ctx.createGain();
+
+                        const taps = [0.072, 0.144, 0.216, 0.288, 0.360, 0.432];
+                        taps.forEach((d, i) => {
+                          const delay = ctx.createDelay();
+                          delay.delayTime.value = d;
+                          const g = ctx.createGain();
+                          g.gain.value = Math.pow(0.32, i + 1);
+                          inNode.connect(delay).connect(g).connect(sum);
+                        });
+
+                        return { input: inNode, output: sum };
+                      }
+
+                      function bufferToWavBlob(buffer) {
+                        // mono WAV 16-bit PCM
+                        const numCh = 1;
+                        const sr = buffer.sampleRate;
+                        const samples = buffer.getChannelData(0);
+                        const bytesPerSample = 2;
+                        const blockAlign = numCh * bytesPerSample;
+                        const byteRate = sr * blockAlign;
+                        const dataSize = samples.length * bytesPerSample;
+
+                        const ab = new ArrayBuffer(44 + dataSize);
+                        const dv = new DataView(ab);
+
+                        function wstr(off, s) { for (let i=0;i<s.length;i++) dv.setUint8(off+i, s.charCodeAt(i)); }
+                        function w32(off, v) { dv.setUint32(off, v, true); }
+                        function w16(off, v) { dv.setUint16(off, v, true); }
+
+                        wstr(0, "RIFF"); w32(4, 36 + dataSize); wstr(8, "WAVE");
+                        wstr(12, "fmt "); w32(16, 16); w16(20, 1); w16(22, numCh);
+                        w32(24, sr); w32(28, byteRate); w16(32, blockAlign); w16(34, 16);
+                        wstr(36, "data"); w32(40, dataSize);
+
+                        let o = 44;
+                        for (let i=0;i<samples.length;i++) {
+                          let s = Math.max(-1, Math.min(1, samples[i]));
+                          dv.setInt16(o, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+                          o += 2;
+                        }
+                        return new Blob([dv], { type: "audio/wav" });
+                      }
+
+                      async function renderJingle() {
+                        // Dauer berechnen + Tail
+                        const durBeats = SEQ.reduce((a, e) => a + e.beats, 0);
+                        const dur = durBeats * beat;
+                        const tail = 0.9;
+                        const sr = 44100;
+                        const length = Math.ceil((dur + tail) * sr);
+
+                        const ctx = new OfflineAudioContext(1, length, sr);
+                        const master = ctx.createGain();
+                        master.gain.value = 0.9;
+                        master.connect(ctx.destination);
+
+                        const rev = makeSimpleReverb(ctx);
+                        rev.output.connect(master);
+
+                        let t = 0.05;
+                        for (const step of SEQ) {
+                          const d = step.beats * beat;
+                          // Bell (alle Noten)
+                          step.notes.forEach(n => addBell(ctx, t, noteToFreq(n), d, master, rev.input, 0.85 / step.notes.length));
+                          // Pad unter der (ersten) Note, eine Oktave tiefer
+                          addPad(ctx, t, noteToFreq(step.notes[0]) / 2, d, master, rev.input);
+                          t += d;
+                        }
+
+                        const buf = await ctx.startRendering();
+                        return bufferToWavBlob(buf);
+                      }
+
+                      const btn = document.getElementById("makeJingle");
+                      const player = document.getElementById("jinglePlayer");
+
+                      btn.addEventListener("click", async () => {
+                        btn.disabled = true;
+                        btn.textContent = "Erzeuge…";
+                        try {
+                          const wavBlob = await renderJingle();
+                          player.src = URL.createObjectURL(wavBlob);
+                          await player.play();
+                        } finally {
+                          btn.disabled = false;
+                          btn.textContent = "Jingle erzeugen";
+                        }
+                      });
+                    })();
+                    </script>
+
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Lizenz / Aufgabe 4 -->
     <section id="license" class="section" aria-labelledby="license-heading">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Aufgabe 4 · Lizenz</span>
-                <h2 id="license-heading">Lizenzbedingungen für HealthyPet (Kurzfassung)</h2>
-                <p>
-                    Im Rahmen dieser Übung wird exemplarisch beschrieben, welche Rechte
-                    Nutzer:innen durch den Kauf eines Abos erhalten und welche Rechte bei
-                    der HealthyPet GmbH verbleiben.
-                </p>
-            </div>
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Aufgabe 4 · Lizenz</span>
+        <h2 id="license-heading">Lizenzbedingungen für HealthyPet (Kurzfassung)</h2>
+        <p>
+          HealthyPet ist eine webbasierte Software (SaaS). Mit dem Abo wird kein „Produkt“ gekauft,
+          sondern ein zeitlich begrenztes Nutzungsrecht an der Online-Anwendung erworben.
+          Diese Kurzfassung dient ausschließlich der Lehrveranstaltung.
+        </p>
+      </div>
 
-            <div class="two-column">
-                <div class="legal-text">
-                    <h3>1. Nutzungsrechte für Kund:innen</h3>
-                    <ul class="legal-list">
-                        <li>
-                            Mit Abschluss eines Abos erwerben Kund:innen das
-                            <strong>einfache, nicht übertragbare</strong> Recht, die
-                            HealthyPet-Software im Rahmen der vereinbarten Laufzeit zu
-                            nutzen (SaaS-Modell).
-                        </li>
-                        <li>
-                            Die Nutzung ist auf die in der Abo-Stufe angegebene Anzahl von
-                            Tieren und Benutzerkonten beschränkt.
-                        </li>
-                        <li>
-                            Zugriff erfolgt ausschließlich über einen Webbrowser. Es wird
-                            keine Software dauerhaft auf Endgeräten übertragen.
-                        </li>
-                        <li>
-                            Kund:innen dürfen Auswertungen und Berichte für den eigenen
-                            privaten Gebrauch und zur Vorlage bei Tierärzt:innen
-                            exportieren, ausdrucken und speichern.
-                        </li>
-                    </ul>
+      <div class="two-column">
+        <div class="legal-text">
+          <h3>1. Nutzungsrechte durch den Kauf (Abo)</h3>
+          <ul class="legal-list">
+            <li>
+              Kund:innen erhalten für die Dauer der bezahlten Laufzeit ein <strong>einfaches (nicht-exklusives)</strong>,
+              <strong>nicht übertragbares</strong> und <strong>nicht unterlizenzierbares</strong> Recht,
+              HealthyPet über den Webbrowser zu nutzen (SaaS).
+            </li>
+            <li>
+              Die Nutzung ist auf die in der gewählten Abo-Stufe definierte Anzahl an
+              <strong>Tieren</strong> und <strong>Benutzerkonten</strong> beschränkt.
+            </li>
+            <li>
+              Export/Download von Auswertungen (z. B. PDF/CSV) ist für
+              <strong>eigene Zwecke</strong> erlaubt, insbesondere zur Dokumentation und zur Vorlage
+              bei Tierärzt:innen.
+            </li>
+            <li>
+              Eine Nutzung für Notfälle ist nicht vorgesehen: Bei akuten Beschwerden oder Gefahrensituationen
+              ist unverzüglich eine Tierarztpraxis/Notdienst zu kontaktieren.
+            </li>
+          </ul>
 
-                    <h3>2. Rechte, die bei HealthyPet verbleiben</h3>
-                    <ul class="legal-list">
-                        <li>
-                            Sämtliche Urheber- und Verwertungsrechte an der Software, dem
-                            Quellcode, der Datenbankstruktur, dem Design und den Marken
-                            verbleiben bei HealthyPet.
-                        </li>
-                        <li>
-                            Das Recht zur <strong>Weitergabe des Zugangs</strong> (z.&nbsp;B.
-                            Verkauf, Vermietung, Unterlizenzierung) bleibt HealthyPet
-                            vorbehalten. Kund:innen dürfen ihre Zugänge nicht an Dritte
-                            verkaufen oder öffentlich zugänglich machen.
-                        </li>
-                        <li>
-                            Reverse Engineering, Dekompilierung oder sonstige Formen der
-                            Nachbildung sind untersagt, soweit dies rechtlich zulässig
-                            ausgeschlossen werden kann.
-                        </li>
-                    </ul>
-
-                    <h3>3. Haftungsbeschränkungen</h3>
-                    <ul class="legal-list">
-                        <li>
-                            HealthyPet stellt <strong>keine veterinärmedizinische
-                            Diagnose</strong>. Die KI-Ergebnisse sind
-                            <strong>unverbindliche Einschätzungen</strong> und ersetzen
-                            nicht die Untersuchung durch Tierärzt:innen.
-                        </li>
-                        <li>
-                            Für gesundheitliche Entscheidungen, die allein auf Basis der
-                            Software getroffen werden, kann keine Haftung übernommen
-                            werden. Nutzer:innen bleiben für das Wohlergehen ihrer Tiere
-                            verantwortlich.
-                        </li>
-                        <li>
-                            Für leichte Fahrlässigkeit haftet HealthyPet – soweit gesetzlich
-                            zulässig – nur bei Verletzung wesentlicher Vertragspflichten
-                            (Kardinalpflichten) und beschränkt auf den typischerweise
-                            vorhersehbaren Schaden (höchstens jedoch in Höhe von sechs
-                            Monatsgebühren des jeweiligen Abos).
-                        </li>
-                        <li>
-                            Eine Haftung für entgangenen Gewinn, mittelbare Schäden oder
-                            Datenverluste ist ausgeschlossen, sofern nicht Vorsatz oder
-                            grobe Fahrlässigkeit vorliegen.
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="legal-text">
-                    <h3>4. Laufzeit &amp; Kündigung</h3>
-                    <ul class="legal-list">
-                        <li>
-                            Abos laufen je nach Auswahl monatlich oder jährlich und
-                            verlängern sich automatisch, wenn sie nicht fristgerecht
-                            gekündigt werden.
-                        </li>
-                        <li>
-                            Kündigungen können jederzeit mit Wirkung zum Ende der
-                            aktuellen Laufzeit erklärt werden (z.&nbsp;B. per E-Mail oder im
-                            Kundenkonto, falls vorhanden).
-                        </li>
-                    </ul>
-
-                    <h3>5. Hinweis zur Rechtsverbindlichkeit</h3>
-                    <p>
-                        Diese Lizenzbedingungen sind ein <strong>Beispiel für eine
-                        Lehrveranstaltung</strong>. In der Praxis sind eine genaue
-                        Rechtsprüfung sowie Anpassung an das jeweils geltende Recht
-                        erforderlich.
-                    </p>
-
-                    <div class="highlight-box">
-                        <p style="margin-top:0;">
-                            <strong>Empfehlung für den realen Einsatz:</strong> Die
-                            endgültige Fassung der Lizenzbedingungen sollte von einer
-                            fachkundigen Rechtsberatung (z.&nbsp;B. Rechtsanwält:in)
-                            überprüft werden – insbesondere im Hinblick auf
-                            Verbraucherschutzrecht, Gewährleistung und Haftung.
-                        </p>
-                    </div>
-                </div>
-            </div>
+          <h3>2. Rechte, die beim Unternehmen verbleiben</h3>
+          <ul class="legal-list">
+            <li>
+              Alle Rechte an HealthyPet (Software, Quellcode, Oberfläche/Design, Datenbankstruktur,
+              Marken inkl. Wort-/Bild-/Klangmarke, Inhalte) verbleiben bei der HealthyPet GmbH.
+            </li>
+            <li>
+              Untersagt sind insbesondere: Zugangsdaten weitergeben/verkaufen, öffentliche Zugänglichmachung,
+              automatisiertes „Scraping“, Umgehung von Nutzungsbeschränkungen sowie Reverse Engineering/
+              Dekompilierung, soweit dies nicht zwingend gesetzlich erlaubt ist.
+            </li>
+          </ul>
         </div>
-    </section>
+
+        <div class="legal-text">
+
+          <h3>5. Haftungsbeschränkungen</h3>
+          <ul class="legal-list">
+            <li>
+              <strong>Unbeschränkte Haftung</strong>: HealthyPet haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit
+              sowie für <strong>Personenschäden</strong> (Verletzung von Leben/Körper/Gesundheit von Menschen) und
+              in Fällen zwingender gesetzlicher Haftung.
+            </li>
+            <li>
+              <strong>Leichte Fahrlässigkeit</strong>: Bei leichter Fahrlässigkeit haftet HealthyPet – soweit zulässig –
+              nur bei Verletzung <strong>wesentlicher Vertragspflichten</strong> (Kardinalpflichten) und nur für den
+              <strong>typischerweise vorhersehbaren</strong> Schaden.
+            </li>
+            <li>
+              <strong>Keine Tierarzt-Diagnose</strong>: HealthyPet liefert Informations- und Strukturierungshilfe.
+              KI-Ausgaben können unvollständig oder fehlerhaft sein; Entscheidungen über Diagnosen,
+              Medikamente oder Behandlungen dürfen nicht allein auf Basis der Software getroffen werden.
+            </li>
+            <li>
+              <strong>Unternehmer:innen (B2B)</strong>: Gegenüber Unternehmer:innen können – soweit zulässig –
+              mittelbare Schäden, entgangener Gewinn und reine Vermögensfolgeschäden ausgeschlossen sowie eine
+              Haftungsobergrenze (z. B. „Summe der in den letzten 12 Monaten bezahlten Netto-Entgelte“) vereinbart werden.
+            </li>
+          </ul>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 
     <!-- Datenschutz / Aufgabe 5 -->
     <section id="privacy" class="section" aria-labelledby="privacy-heading">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Aufgabe 5 · Datenschutz</span>
-                <h2 id="privacy-heading">Datenschutzerklärung (Auszug, Beispiel)</h2>
-                <p>
-                    Diese Datenschutzerklärung beschreibt beispielhaft, wie im Rahmen
-                    dieses Demo-Webshops personenbezogene Daten verarbeitet werden
-                    könnten. Sie orientiert sich an den Informationspflichten nach DSGVO
-                    (Art. 13/14) und berücksichtigt typische Webshop-Prozesse wie
-                    Kontaktformular, Abo-Abschluss, Cookies und optionale Analyse-Tools.
-                </p>
-            </div>
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Aufgabe 5 · Datenschutz</span>
+        <h2 id="privacy-heading">Datenschutzerklärung</h2>
+        <p>
+          Diese Datenschutzerklärung informiert über Art, Umfang und Zwecke der Verarbeitung personenbezogener Daten
+          im Rahmen des Demo-Webshops.
+          <strong>Wichtig:</strong> In dieser Übungsseite sind Bestellungen, Zahlungen und der Versand des Kontaktformulars technisch gemockt.
+        </p>
+      </div>
 
-            <div class="legal-text">
-                <h3>1. Verantwortlicher</h3>
-                <p>
-                    HealthyPet GmbH<br />
-                    Beispielgasse 1/3, 1010 Wien, Österreich<br />
-                    E-Mail: <a href="mailto:hello@healthypet.example">hello@healthypet.example</a><br />
-                    Telefon: +43 (0)1 234 56 78
-                </p>
+      <div class="legal-text">
+        <h3>1. Verantwortlicher</h3>
+        <p>
+          HealthyPet GmbH (fiktiv)<br />
+          Beispielgasse 1/3, 1010 Wien, Österreich<br />
+          E-Mail: <a href="mailto:hello@healthypet.example">hello@healthypet.example</a><br />
+          Telefon: +43 (0)1 234 56 78
+        </p>
 
-                <h3>2. Datenschutzbeauftragte:r (fiktiv)</h3>
-                <p>
-                    Datenschutzbeauftragte:r der HealthyPet GmbH<br />
-                    E-Mail: <a href="mailto:dpo@healthypet.example">dpo@healthypet.example</a>
-                </p>
+        <h3>2. Kontakt Datenschutz / Datenschutzbeauftragte:r</h3>
+        <p>
+          Datenschutz-Kontakt (fiktiv): <a href="mailto:dpo@healthypet.example">dpo@healthypet.example</a><br />
+        </p>
 
-                <h3>3. Kategorien personenbezogener Daten</h3>
-                <p>Wir verarbeiten – je nach Nutzung – insbesondere folgende Datenkategorien:</p>
-                <ul class="legal-list">
-                    <li>
-                        <strong>Stammdaten:</strong> Name, ggf. Anschrift.
-                    </li>
-                    <li>
-                        <strong>Kontaktdaten:</strong> E-Mail-Adresse, Telefonnummer.
-                    </li>
-                    <li>
-                        <strong>Kommunikations- und Inhaltsdaten:</strong> Inhalte von
-                        Anfragen über das Kontaktformular oder per E-Mail.
-                    </li>
-                    <li>
-                        <strong>Nutzungsdaten:</strong> IP-Adresse (gekürzt, soweit
-                        möglich), Datum und Uhrzeit der Anfrage, aufgerufene Seiten,
-                        Browsertyp, Betriebssystem.
-                    </li>
-                    <li>
-                        <strong>Vertrags- und Zahlungsdaten (in einem echten Webshop):</strong>
-                        gewählte Abo-Stufe, Laufzeit, Rechnungs- und Zahlungsinformationen.
-                    </li>
-                    <li>
-                        <strong>Anwendungsdaten (Produktivbetrieb):</strong> Gesundheits- und
-                        Verhaltensdaten von Tieren (z.&nbsp;B. Symptome, Diagnosen, Medikationspläne).
-                        Diese Daten können Rückschlüsse auf die Halter:innen zulassen und
-                        werden deshalb mit besonderer Sorgfalt verarbeitet.
-                    </li>
-                </ul>
+        <h3>3. Anwendungsbereich</h3>
+        <p>
+          Diese Erklärung gilt für diese Website (Demo-Webshop) sowie – im Fall eines Produktivbetriebs – für die Web-App
+          „HealthyPet“ (SaaS) und damit verbundene Kommunikation (z.&nbsp;B. Support).
+        </p>
 
-                <h3>4. Zwecke und Rechtsgrundlagen der Verarbeitung</h3>
-                <ul class="legal-list">
-                    <li>
-                        <strong>Bereitstellung der Website &amp; IT-Sicherheit</strong><br />
-                        Zweck: Technischer Betrieb, Stabilität und Sicherheit der Website.<br />
-                        Rechtsgrundlage: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).
-                    </li>
-                    <li>
-                        <strong>Kontaktanfragen</strong><br />
-                        Zweck: Bearbeitung von Anfragen zu Produkt, Lizenz oder Datenschutz.<br />
-                        Rechtsgrundlage: vorvertragliche Maßnahmen / Vertragserfüllung
-                        (Art. 6 Abs. 1 lit. b DSGVO) oder berechtigtes Interesse
-                        (Art. 6 Abs. 1 lit. f DSGVO).
-                    </li>
-                    <li>
-                        <strong>Abo-Abwicklung (in einem echten Webshop)</strong><br />
-                        Zweck: Abwicklung von Bestellungen, Verrechnung und Kundenverwaltung.<br />
-                        Rechtsgrundlage: Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO),
-                        gesetzliche Verpflichtungen (z.&nbsp;B. steuerliche Aufbewahrungspflichten,
-                        Art. 6 Abs. 1 lit. c DSGVO).
-                    </li>
-                    <li>
-                        <strong>Webanalyse und Marketing (optional)</strong><br />
-                        Zweck: Reichweitenmessung, Nutzungsstatistiken, Optimierung des
-                        Angebots, ggf. Direktwerbung.<br />
-                        Rechtsgrundlage: Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) über
-                        ein Cookie-Banner; jederzeit widerruflich für die Zukunft.
-                    </li>
-                </ul>
+        <h3>4. Welche Daten wir verarbeiten (Kategorien)</h3>
+        <ul class="legal-list">
+          <li><strong>Stammdaten:</strong> Name (ggf. Anschrift im Produktivbetrieb).</li>
+          <li><strong>Kontaktdaten:</strong> E-Mail-Adresse, Telefonnummer (optional).</li>
+          <li><strong>Kommunikationsdaten:</strong> Inhalte von Anfragen (Kontaktformular/E-Mail), Zeitpunkt, Bearbeitungsverlauf.</li>
+          <li><strong>Nutzungs-/Gerätedaten:</strong> IP-Adresse, Datum/Uhrzeit, aufgerufene Seiten, Referrer-URL, Browser/OS, Spracheinstellungen.</li>
+          <li><strong>Vertrags-/Abodaten:</strong> gewählte Abo-Stufe, Laufzeit, Rechnungsstatus, Historie.</li>
+          <li><strong>Zahlungsdaten:</strong> Zahlungsbestätigung/Transaktions-ID über Zahlungsdienstleister (keine Speicherung kompletter Karten-/Bankdaten bei HealthyPet).</li>
+          <li><strong>Anwendungsdaten:</strong> Tierprofil-Daten und vom Nutzer eingegebene Informationen (z.&nbsp;B. Symptome/Verhalten/Verlauf) sowie erzeugte Auswertungen.</li>
+        </ul>
 
-                <h3>5. Empfänger &amp; Drittlandübermittlungen</h3>
-                <ul class="legal-list">
-                    <li>
-                        <strong>Hosting-Provider:</strong> zur Bereitstellung der Website und
-                        Speicherung von Server-Logs (Auftragsverarbeiter).
-                    </li>
-                    <li>
-                        <strong>E-Mail- und Support-Dienstleister:</strong> zur Bearbeitung
-                        von Anfragen (Auftragsverarbeiter).
-                    </li>
-                    <li>
-                        <strong>Zahlungsdienstleister (in einem echten Webshop):</strong>
-                        zur Abwicklung von Zahlungen.
-                    </li>
-                    <li>
-                        Eine Übermittlung in Drittländer außerhalb der EU/des EWR würde nur
-                        erfolgen, wenn hierfür geeignete Garantien bestehen (z.&nbsp;B.
-                        Angemessenheitsbeschluss oder Standardvertragsklauseln).
-                    </li>
-                </ul>
+        <h3>5. Übersicht der Verarbeitungsvorgänge</h3>
+          <div class="card card-muted" style="padding:1rem;">
+            <table class="table" aria-label="Übersicht Verarbeitungsvorgänge">
+              <thead>
+                <tr>
+                  <th>Vorgang</th>
+                  <th>Zweck</th>
+                  <th>Daten</th>
+                  <th>Rechtsgrundlage</th>
+                  <th>Speicherdauer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Website-Aufruf / Server-Logs</td>
+                  <td>Bereitstellung der Website, Stabilität, IT-Sicherheit, Fehleranalyse</td>
+                  <td>IP-Adresse, Datum/Uhrzeit, aufgerufene URL, Referrer-URL, Geräte-/Browserdaten</td>
+                  <td>Berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO)</td>
+                  <td>30 Tage (Server-Logs), im Anlassfall länger zur Aufklärung von Sicherheitsvorfällen</td>
+                </tr>
 
-                <h3>6. Cookies &amp; optionale Analyse-Tools</h3>
-                <p>
-                    In dieser Demoseite werden keine echten Analyse-Tools eingebunden. Für
-                    einen realen Webshop gilt:
-                </p>
-                <ul class="legal-list">
-                    <li>
-                        Technisch notwendige Cookies (z.&nbsp;B. Session-Cookies) können ohne
-                        Einwilligung gesetzt werden, da sie für die Bereitstellung des
-                        Dienstes erforderlich sind.
-                    </li>
-                    <li>
-                        Für funktionale, statistische oder Marketing-Cookies ist nach
-                        österreichischem Telekommunikationsgesetz (TKG 2021) grundsätzlich
-                        eine <strong>Einwilligung</strong> erforderlich; diese sollte über
-                        ein klar gestaltetes Cookie-Banner eingeholt werden.
-                    </li>
-                    <li>
-                        Informationen zu Art und Zweck der Cookies sind in der
-                        Datenschutzerklärung zu dokumentieren.
-                    </li>
-                </ul>
+                <tr>
+                  <td>Kontaktformular / Support</td>
+                  <td>Bearbeitung von Anfragen, Support, Dokumentation der Kommunikation</td>
+                  <td>Name, E-Mail-Adresse, Betreff, Nachrichteninhalt, Zeitpunkt der Anfrage</td>
+                  <td>Vorvertragliche Maßnahmen/Vertrag (Art. 6 Abs. 1 lit. b DSGVO) und/oder berechtigtes Interesse (lit. f)</td>
+                  <td>6 Monate nach Abschluss der Bearbeitung; bei Vertragsbezug für die Dauer des Vertrags + Nachweisfristen</td>
+                </tr>
 
-                <h3>7. Speicherdauer</h3>
-                <ul class="legal-list">
-                    <li>
-                        Kontaktanfragen: bis zur vollständigen Beantwortung und für eine
-                        angemessene Nachhaltefrist (z.&nbsp;B. 6 Monate).
-                    </li>
-                    <li>
-                        Vertrags- und Abrechnungsdaten (in einem echten Webshop):
-                        entsprechend der gesetzlichen Aufbewahrungsfristen (z.&nbsp;B.
-                        7 Jahre nach UGB/BAO).
-                    </li>
-                    <li>
-                        Server-Logdaten: typischerweise einige Tage bis wenige Wochen, sofern
-                        sie nicht zur Aufklärung von Vorfällen länger benötigt werden.
-                    </li>
-                </ul>
+                <tr>
+                  <td>Registrierung / Konto</td>
+                  <td>Einrichtung und Verwaltung des Kundenkontos, Authentifizierung, Zugriff auf Funktionen</td>
+                  <td>Name, E-Mail-Adresse, Login-Daten (Passwort gehasht), Kontoeinstellungen, Protokolle zu Login-Versuchen</td>
+                  <td>Vertrag (Art. 6 Abs. 1 lit. b DSGVO) und berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an Sicherheit/Missbrauchsprävention</td>
+                  <td>Für die Dauer des Kontos; nach Löschung/Beendigung für Nachweis- und Sicherheitszwecke (z.&nbsp;B. 6 Monate), sofern erforderlich</td>
+                </tr>
 
-                <h3>8. Rechte der betroffenen Personen</h3>
-                <p>Betroffene Personen haben insbesondere das Recht auf:</p>
-                <ul class="legal-list">
-                    <li>Auskunft über die verarbeiteten personenbezogenen Daten,</li>
-                    <li>Berichtigung unrichtiger Daten,</li>
-                    <li>Löschung („Recht auf Vergessenwerden“),</li>
-                    <li>Einschränkung der Verarbeitung,</li>
-                    <li>Datenübertragbarkeit,</li>
-                    <li>Widerspruch gegen bestimmte Verarbeitungen,</li>
-                    <li>
-                        Widerruf von Einwilligungen mit Wirkung für die Zukunft (z.&nbsp;B.
-                        Analyse-Cookies oder Direktmarketing).
-                    </li>
-                </ul>
-                <p>
-                    Zur Ausübung dieser Rechte kann jederzeit Kontakt mit uns oder mit der
-                    oben genannten Datenschutzbeauftragten aufgenommen werden.
-                </p>
+                <tr>
+                  <td>Abo-Abschluss / Vertragsverwaltung</td>
+                  <td>Abwicklung des Abos, Verrechnung, Kund:innenverwaltung, Bereitstellung der Leistung</td>
+                  <td>Kontaktdaten, Abo-Stufe, Laufzeit, Rechnungsdaten, Status-/Historieninformationen</td>
+                  <td>Vertrag (Art. 6 Abs. 1 lit. b DSGVO) und rechtliche Verpflichtung (Art. 6 Abs. 1 lit. c DSGVO)</td>
+                  <td>Vertragsdauer + gesetzliche Aufbewahrungspflichten (insb. 7 Jahre für Abrechnungsunterlagen, soweit anwendbar)</td>
+                </tr>
 
-                <h3>9. Beschwerderecht</h3>
-                <p>
-                    Darüber hinaus besteht das Recht, Beschwerde bei einer
-                    Datenschutzaufsichtsbehörde zu erheben, z.&nbsp;B. bei der
-                    österreichischen Datenschutzbehörde (DSB).
-                </p>
+                <tr>
+                  <td>Zahlungsabwicklung</td>
+                  <td>Zahlung, Betrugsprävention, Abrechnung, Rückerstattungen</td>
+                  <td>Transaktionsdaten (z.&nbsp;B. Zahlungsstatus, Betrag, Währung, Zeitstempel), Referenz-/Transaktions-ID</td>
+                  <td>Vertrag (Art. 6 Abs. 1 lit. b DSGVO), rechtliche Verpflichtung (Art. 6 Abs. 1 lit. c DSGVO), berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO)</td>
+                  <td>7 Jahre für Abrechnungs-/Steuerunterlagen (soweit anwendbar); Transaktionsprotokolle nach Bedarf zur Betrugsprävention</td>
+                </tr>
 
-                <h3>10. Pflicht zur Bereitstellung von Daten</h3>
-                <p>
-                    Die Bereitstellung von Kontakt- und Vertragsdaten ist für die
-                    Nutzung bestimmter Funktionen (z.&nbsp;B. Kontaktformular, Abo-Abschluss)
-                    erforderlich. Ohne diese Daten kann der jeweilige Dienst nicht oder nur
-                    eingeschränkt bereitgestellt werden.
-                </p>
+                <tr>
+                  <td>Anwendungsnutzung (SaaS)</td>
+                  <td>Bereitstellung der Kernfunktionen (Tierprofile, Eingaben, Auswertungen), Qualitätssicherung, Support</td>
+                  <td>Tierprofil- und Eingabedaten (z.&nbsp;B. Symptome/Verhalten), erzeugte Auswertungen, Nutzungsereignisse innerhalb der App</td>
+                  <td>Vertrag (Art. 6 Abs. 1 lit. b DSGVO); berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an IT-Sicherheit und Fehlerbehebung</td>
+                  <td>Für die Dauer des Abos bzw. bis zur Löschung durch Kund:innen; Backups nach Rotationsprinzip (z.&nbsp;B. 30–90 Tage)</td>
+                </tr>
 
-                <h3>11. Automatisierte Entscheidungsfindung</h3>
-                <p>
-                    In dieser Demo findet keine automatisierte Entscheidungsfindung
-                    einschließlich Profiling im Sinne von Art. 22 DSGVO statt, die
-                    gegenüber Nutzer:innen rechtliche Wirkung entfaltet oder sie in
-                    ähnlicher Weise erheblich beeinträchtigt.
-                </p>
+                <tr>
+                  <td>Technisch notwendige Cookies</td>
+                  <td>Grundfunktionen (Session/Anmeldung), Sicherheit (z.&nbsp;B. CSRF-Schutz), Speicherung essenzieller Einstellungen</td>
+                  <td>Session-ID / Sicherheits-Token (zufällige Kennung), ggf. Spracheinstellung</td>
+                  <td>Berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) und/oder Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO) für notwendige Funktionen</td>
+                  <td>Session-Cookies: bis zum Schließen des Browsers; persistente notwendige Cookies: max. 12 Monate</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                <h3>12. Stand dieser Datenschutzerklärung</h3>
-                <p>
-                    Diese Datenschutzerklärung ist ein <strong>vereinfachtes Beispiel</strong>
-                    für eine Lehrveranstaltung und erhebt keinen Anspruch auf
-                    Vollständigkeit oder rechtliche Verbindlichkeit. Für einen realen
-                    Webshop wäre eine individuelle rechtliche Prüfung erforderlich.
-                </p>
-            </div>
-        </div>
-    </section>
+        <h3>6. Cookies und ähnliche Technologien (ohne Tracking)</h3>
+        <p>
+          Wir verfolgen das Prinzip „so wenig wie möglich“: Diese Website verwendet <strong>keine Tracking- oder Marketing-Cookies</strong>
+          und <strong>keine Cookies, die Nutzer:innen über Websites hinweg wiedererkennen</strong> (kein Profiling, kein Remarketing).
+          Falls Cookies gesetzt werden, dann – soweit möglich – nur <strong>technisch notwendige</strong> und <strong>nicht-identifizierende</strong>
+          Cookies, die für grundlegende Funktionen erforderlich sind.
+        </p>
+
+        <ul class="legal-list">
+          <li>
+            <strong>Technisch notwendige Cookies (falls eingesetzt):</strong>
+            z.&nbsp;B. Sicherheits-/Session-Funktionen (Login im Produktivbetrieb), Schutz vor Missbrauch (CSRF),
+            oder das Merken einer Spracheinstellung.
+            Diese Cookies dienen nicht der Wiedererkennung über andere Websites hinweg.
+          </li>
+          <li>
+            <strong>Keine Statistik-/Analyse-Cookies:</strong>
+            In dieser Demo wird keine Reichweitenmessung und kein Drittanbieter-Tracking eingesetzt.
+            In einem Produktivbetrieb würden Analyse-Tools nur dann aktiviert, wenn dies erforderlich ist und
+            – soweit rechtlich geboten – erst nach ausdrücklicher Einwilligung.
+          </li>
+          <li>
+            <strong>Keine Marketing-Cookies:</strong>
+            Es werden keine Cookies für personalisierte Werbung, Conversion-Tracking oder Remarketing gesetzt.
+          </li>
+        </ul>
+        <h3>7. Empfänger, Auftragsverarbeiter und Drittlandübermittlungen</h3>
+        <p>
+          Im Produktivbetrieb können personenbezogene Daten an folgende Kategorien von Empfängern übermittelt werden:
+        </p>
+        <ul class="legal-list">
+          <li><strong>Hosting-/IT-Dienstleister</strong> (Serverbetrieb, Wartung) als Auftragsverarbeiter.</li>
+          <li><strong>E-Mail-/Support-Dienstleister</strong> (Ticketing, Kommunikation) als Auftragsverarbeiter.</li>
+          <li><strong>Zahlungsdienstleister</strong> (Abwicklung von Zahlungen) als eigene Verantwortliche oder Auftragsverarbeiter – je nach Modell.</li>
+          <li><strong>Analyse-/Marketing-Anbieter</strong> nur bei Einwilligung und entsprechender Einbindung.</li>
+        </ul>
+        <p>
+          Eine Übermittlung in Staaten außerhalb EU/EWR findet – falls überhaupt – nur statt, wenn die gesetzlichen Voraussetzungen erfüllt sind
+          (z.&nbsp;B. Angemessenheitsbeschluss oder Standardvertragsklauseln und zusätzliche Schutzmaßnahmen).
+        </p>
+
+        <h3>8. Speicherdauer</h3>
+        <ul class="legal-list">
+          <li><strong>Server-Logs:</strong> typischerweise wenige Tage bis Wochen.</li>
+          <li><strong>Kontaktanfragen (Produktivbetrieb):</strong> bis zur Erledigung + angemessene Nachhaltefrist (z.&nbsp;B. 6 Monate).</li>
+          <li><strong>Vertrags-/Abodaten (Produktivbetrieb):</strong> Vertragsdauer + gesetzliche Aufbewahrungspflichten.</li>
+          <li><strong>Cookies:</strong> je nach Kategorie (Session-Cookies bis zum Schließen des Browsers; persistente Cookies bis Monate).</li>
+        </ul>
+
+        <h3>9. Ihre Rechte</h3>
+        <p>Betroffene Personen haben – je nach Anwendbarkeit – insbesondere folgende Rechte:</p>
+        <ul class="legal-list">
+          <li>Auskunft (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO)</li>
+          <li>Löschung (Art. 17 DSGVO)</li>
+          <li>Einschränkung (Art. 18 DSGVO)</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Widerspruch (Art. 21 DSGVO), insbesondere gegen Direktwerbung</li>
+          <li>Widerruf von Einwilligungen (Art. 7 Abs. 3 DSGVO) mit Wirkung für die Zukunft</li>
+        </ul>
+        <p>
+          Zur Ausübung der Rechte genügt eine Nachricht an:
+          <a href="mailto:hello@healthypet.example">hello@healthypet.example</a>
+        </p>
+
+        <h3>10. Beschwerderecht bei der Aufsichtsbehörde</h3>
+        <p>
+          Wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer Daten gegen Datenschutzrecht verstößt, können Sie eine Beschwerde bei der
+          österreichischen Datenschutzbehörde einbringen.
+        </p>
+        <p>
+          Österreichische Datenschutzbehörde (DSB)<br />
+          Barichgasse 40–42, 1030 Wien<br />
+          E-Mail: <a href="mailto:dsb@dsb.gv.at">dsb@dsb.gv.at</a>
+        </p>
+
+        <h3>11. Pflicht zur Bereitstellung von Daten</h3>
+        <p>
+          Die Bereitstellung bestimmter Daten ist erforderlich, um Funktionen zu nutzen (z.&nbsp;B. Kontaktaufnahme, Konto/Abschluss im Produktivbetrieb).
+          Ohne diese Daten kann der jeweilige Dienst nicht oder nur eingeschränkt bereitgestellt werden.
+        </p>
+
+        <h3>12. Automatisierte Entscheidungen / KI-Auswertungen</h3>
+        <p>
+          HealthyPet kann im Produktivbetrieb Eingaben zu Tierprofilen automatisiert auswerten (KI-gestützte Analyse),
+          um Informationen strukturiert darzustellen. Es erfolgt dabei keine automatisierte Entscheidung mit rechtlicher Wirkung
+          gegenüber Nutzer:innen im Sinne von Art. 22 DSGVO.
+        </p>
+
+        <h3>13. Datensicherheit</h3>
+        <p>
+          Wir setzen angemessene technische und organisatorische Maßnahmen ein (z.&nbsp;B. Zugriffsbeschränkungen, Protokollierung,
+          Transportverschlüsselung/HTTPS, Berechtigungskonzepte), um personenbezogene Daten zu schützen.
+        </p>
+
+        <h3>14. Stand dieser Datenschutzerklärung</h3>
+        <p>
+          Stand: <strong>Dezember 2025</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
 
     <!-- Barrierefreiheitserklärung / Aufgabe 1 -->
     <section id="accessibility" class="section" aria-labelledby="accessibility-heading">
@@ -1486,122 +1868,119 @@
         </div>
     </section>
 
-    <!-- Medien & Urheberrecht / Aufgabe 2 -->
+    <!-- Aufgabe 2 Urheberrecht/Medienarten !-->
     <section id="media-licenses" class="section" aria-labelledby="media-heading">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Aufgabe 2 · Urheberrecht &amp; Medien</span>
-                <h2 id="media-heading">Medien &amp; Lizenzen</h2>
-                <p>
-                    Im Rahmen dieser Übung werden mehrere Medienarten integriert. Die
-                    nachfolgende Tabelle dokumentiert beispielhaft Urheberrechtshinweise
-                    und Lizenzen. Die Dateien liegen – fiktiv – im Ordner <code>/media</code>.
-                </p>
-            </div>
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Aufgabe 2 · Urheberrecht &amp; Medien</span>
+        <h2 id="media-heading">Medien &amp; Lizenzen</h2>
 
-            <div class="card card-muted">
-                <table class="table" aria-label="Übersicht der verwendeten Medien und Lizenzen">
-                    <thead>
-                        <tr>
-                            <th>Medienart</th>
-                            <th>Dateiname / Einsatz</th>
-                            <th>Urheber / Quelle</th>
-                            <th>Lizenz / Rechte</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Bilder / Grafiken</td>
-                            <td>
-                                <strong>Logo &amp; Icons</strong><br />
-                                <code>media/healthypet-logo.svg</code><br />
-                                <code>media/hero-pet.png</code>
-                            </td>
-                            <td>
-                                HealthyPet GmbH (fiktive Inhouse-Grafik)
-                            </td>
-                            <td>
-                                Eigenes Werk. Alle Urheber- und Verwertungsrechte bei
-                                HealthyPet. Nutzung ausschließlich im Zusammenhang mit dem
-                                Webshop und Marketingmaterialien von HealthyPet.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Video</td>
-                            <td>
-                                <strong>Produkt-Demo-Video</strong><br />
-                                <code>media/healthypet-demo.mp4</code><br />
-                                Eingebunden z.&nbsp;B. auf einer Produktseite.
-                            </td>
-                            <td>
-                                HealthyPet GmbH (fiktive Eigenproduktion)
-                            </td>
-                            <td>
-                                Eigenes Werk. Alle Rechte vorbehalten. Vervielfältigung
-                                oder öffentliche Aufführung nur mit Zustimmung von
-                                HealthyPet.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Musik / Sounds</td>
-                            <td>
-                                <strong>Klangmarke / Jingle</strong><br />
-                                <code>media/healthypet-jingle.ogg</code><br />
-                                <code>media/healthypet-jingle.mp3</code>
-                            </td>
-                            <td>
-                                HealthyPet GmbH (fiktive Eigenkomposition)
-                            </td>
-                            <td>
-                                Eigenes Werk. Dient als Klangmarke im Webshop und in
-                                Marketingvideos. Keine Weiterlizenzierung an Dritte ohne
-                                gesonderte Vereinbarung.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Schriftarten</td>
-                            <td>
-                                Systemschriftarten<br />
-                                (z.&nbsp;B. system-ui, Segoe UI, Sans-Serif)
-                            </td>
-                            <td>
-                                Betriebssystemhersteller / Browserhersteller
-                            </td>
-                            <td>
-                                Es werden keine zusätzlichen Webfonts geladen. Die Nutzung
-                                der systemeigenen Schriftarten erfolgt im Rahmen der
-                                jeweiligen Endbenutzer-Lizenzbedingungen der
-                                Betriebssysteme bzw. Browser.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Texte</td>
-                            <td>
-                                Alle Seiteninhalte (Start, Produkt, About, Lizenz,
-                                Datenschutz, Impressum etc.)
-                            </td>
-                            <td>
-                                HealthyPet GmbH (fiktive eigene Texte für diese Übung)
-                            </td>
-                            <td>
-                                Eigenes Werk. Nutzung ausschließlich für die Demonstration
-                                innerhalb der Lehrveranstaltung. Keine Übertragung von
-                                Nutzungsrechten an Dritte ohne Zustimmung.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!--<p>
+          Die Medien (2 Fotos + 1 Video) werden direkt per Link von Wikimedia Commons geladen.
+          Zusätzlich sind eigene Werke enthalten (Logo/SVG, Texte, Layout, generierter Jingle).
+        </p>
+      </div>
+      !-->
+      <div class="card card-muted" style="margin-top:1rem;">
+        <table class="table" aria-label="Übersicht der verwendeten Medien und Lizenzen">
+          <thead>
+            <tr>
+              <th>Medienart</th>
+              <th>Einsatz / URL</th>
+              <th>Urheber / Quelle</th>
+              <th>Lizenz / Pflichten</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Grafik / Logo</td>
+              <td><strong>HealthyPet Bildmarke (SVG)</strong><br />Inline-SVG im Header / About</td>
+              <td>Eigenwerk (HealthyPet GmbH – fiktiv)</td>
+              <td>Eigenes Werk. Alle Rechte vorbehalten .</td>
+            </tr>
 
-                <p class="form-hint" style="margin-top:0.75rem;">
-                    Hinweis: In einem realen Projekt wäre sicherzustellen, dass alle
-                    verwendeten Medien tatsächlichen Lizenzen entsprechen (z.&nbsp;B.
-                    Creative Commons, Stockmaterial, Eigenproduktionen) und die
-                    entsprechenden Lizenzbedingungen eingehalten werden (Namensnennung,
-                    kommerzielle Nutzung, Bearbeitungen etc.).
-                </p>
-            </div>
-        </div>
-    </section>
+            <tr>
+              <td>Bild</td>
+              <td>
+                <strong>Hero-Foto Hund</strong><br />
+                <code>Special:FilePath/Happy_dog_at_Anjuna_Beach_(Unsplash).jpg</code>
+              </td>
+              <td>
+                Samantha Scholl (Unsplash), via Wikimedia Commons<br />
+                <a href="https://commons.wikimedia.org/wiki/File:Happy_dog_at_Anjuna_Beach_(Unsplash).jpg"
+                   target="_blank" rel="license noopener noreferrer">Dateiseite</a>
+              </td>
+              <td>
+                <strong>CC0 1.0</strong> (Public Domain Dedication). Keine Namensnennungspflicht;
+                Quelle/Autor werden dennoch dokumentiert.
+              </td>
+            </tr>
+
+            <tr>
+              <td>Bild</td>
+              <td>
+                <strong>Hero-Foto Katze</strong><br />
+                <code>Special:FilePath/Cat_greeting_its_owner_(Unsplash).jpg</code>
+              </td>
+              <td>
+                Ella Jardim (Unsplash), via Wikimedia Commons<br />
+                <a href="https://commons.wikimedia.org/wiki/File:Cat_greeting_its_owner_(Unsplash).jpg"
+                   target="_blank" rel="license noopener noreferrer">Dateiseite</a>
+              </td>
+              <td>
+                <strong>CC0 1.0</strong> (Public Domain Dedication). Keine Namensnennungspflicht;
+                Quelle/Autor werden dennoch dokumentiert.
+              </td>
+            </tr>
+
+            <tr>
+              <td>Video</td>
+              <td>
+                <strong>Hero-Video: spielende Welpen</strong><br />
+                <code>Special:FilePath/Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm</code>
+              </td>
+              <td>
+                Tim Sweet, via Wikimedia Commons<br />
+                <a href="https://commons.wikimedia.org/wiki/File:Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
+                   target="_blank" rel="license noopener noreferrer">Dateiseite</a>
+              </td>
+              <td>
+                <strong>CC BY-SA 3.0</strong>: Namensnennung + Lizenzhinweis erforderlich.
+                „Share-Alike“ gilt bei Bearbeitungen/Adaptionen (bei reiner Einbettung unverändert typischerweise keine SA-Auslösung).
+              </td>
+            </tr>
+
+            <tr>
+              <td>Audio</td>
+              <td>
+                <strong>Klangmarke (Jingle)</strong><br />
+                Im Browser generiert (WebAudio + OfflineAudioContext im Code)
+              </td>
+              <td>Eigenwerk (Melodie + Synthese-Implementierung)</td>
+              <td>Eigenes Werk. Alle Rechte vorbehalten.</td>
+            </tr>
+
+            <tr>
+              <td>Texte / Inhalte</td>
+              <td>Alle Seiteninhalte (Start, Produkt, Lizenz, Datenschutz, Impressum etc.)</td>
+              <td>Eigenwerk (für Lehrzwecke)</td>
+              <td>Eigenes Werk. Nutzung ausschließlich im Rahmen der Lehrveranstaltung.</td>
+            </tr>
+
+            <tr>
+              <td>Schriftarten</td>
+              <td>Systemschriftarten (CSS: <code>system-ui</code>, Segoe UI, Sans-Serif)</td>
+              <td>Betriebssystem-/Browserhersteller</td>
+              <td>Keine externen Webfonts; Nutzung im Rahmen der jeweiligen Systemlizenzen.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+
 
     <!-- Kontakt & Gewerbe / Aufgabe 6 -->
     <section id="contact" class="section" aria-labelledby="contact-heading">
@@ -1688,75 +2067,93 @@
     </section>
 
     <!-- Impressum / Aufgabe 6 + §24 MedienG -->
-    <section id="imprint" class="section" aria-labelledby="imprint-heading">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Aufgabe 6 · Impressum</span>
-                <h2 id="imprint-heading">Impressum (Beispiel nach österreichischem Recht)</h2>
-                <p>
-                    Dieses Impressum ist auf die fiktive HealthyPet GmbH zugeschnitten und
-                    orientiert sich an den in Österreich üblichen Angaben (u.&nbsp;a. nach
-                    § 24 Mediengesetz). Es ersetzt keine Rechtsberatung.
-                </p>
-            </div>
+    <!-- Impressum / Aufgabe 6 (ECG) + Offenlegung (MedienG) -->
+  <section id="imprint" class="section" aria-labelledby="imprint-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Aufgabe 6 · Impressum</span>
+        <h2 id="imprint-heading">Impressum &amp; Offenlegung</h2>
+        <p>
+          Angaben für den Betrieb dieses Webshops (Diensteanbieterinformationen) sowie Offenlegung
+          für ein elektronisches Medium.
+        </p>
+      </div>
 
-            <div class="legal-text">
-                <h3>Medieninhaber, Herausgeber &amp; Dienstanbieter</h3>
-                <p>
-                    HealthyPet GmbH<br />
-                    Beispielgasse 1/3, 1010 Wien, Österreich<br />
-                    E-Mail: <a href="mailto:hello@healthypet.example">hello@healthypet.example</a><br />
-                    Telefon: +43 (0)1 234 56 78
-                </p>
+      <div class="legal-text">
+        <h3>1. Diensteanbieter (Impressum gemäß § 5 ECG)</h3>
+        <address style="font-style:normal;">
+          <strong>HealthyPet GmbH</strong><br />
+          Beispielgasse 1/3<br />
+          1010 Wien<br />
+          Österreich<br /><br />
+          E-Mail: <a href="mailto:hello@healthypet.example">hello@healthypet.example</a><br />
+          Telefon: +43 (0)1 234 56 78
+        </address>
 
-                <h3>Unternehmensgegenstand</h3>
-                <p>
-                    Entwicklung, Betrieb und Vertrieb von Softwarelösungen und
-                    Online-Diensten im Bereich Tiergesundheit und Tierhaltung, insbesondere
-                    KI-gestützte Informationsangebote für Tierhalter:innen.
-                </p>
+        <h3>2. Unternehmensangaben</h3>
+        <p>
+          <strong>Rechtsform:</strong> GmbH (fiktiv)<br />
+          <strong>Sitz:</strong> Wien<br />
+          <strong>Firmenbuchnummer:</strong> FN 123456a (fiktiv)<br />
+          <strong>Firmenbuchgericht:</strong> Handelsgericht Wien<br />
+          <strong>UID-Nummer:</strong> ATU12345678 (fiktiv)
+        </p>
 
-                <h3>Firmenbuchdaten (fiktiv)</h3>
-                <p>
-                    Firmenbuchnummer: FN 123456a<br />
-                    Firmenbuchgericht: Handelsgericht Wien<br />
-                    Sitz: Wien<br />
-                    UID-Nummer: ATU12345678
-                </p>
+        <h3>3. Vertretungsbefugte Person</h3>
+        <p>
+          <strong>Geschäftsführung:</strong> David Riemer (fiktiv)
+        </p>
 
-                <h3>Mitgliedschaften</h3>
-                <p>
-                    Mitglied der Wirtschaftskammer Wien<br />
-                    Fachgruppe Unternehmensberatung, Buchhaltung und IT
-                </p>
+        <h3>4. Unternehmensgegenstand</h3>
+        <p>
+          Entwicklung, Betrieb und Vertrieb von Softwarelösungen und Online-Diensten im Bereich
+          Tiergesundheit und Tierhaltung, insbesondere KI-gestützte Informationsangebote für Tierhalter:innen (SaaS).
+        </p>
 
-                <h3>Grundlegende Richtung des Mediums (Blattlinie)</h3>
-                <p>
-                    Bereitstellung von Informationen über digitale Lösungen für
-                    Tierhalter:innen, Vorstellung der Software „HealthyPet“ und
-                    Bereitstellung eines (fiktiven) Webshops zur Buchung von
-                    Software-Abonnements.
-                </p>
+        <h3>5. Gewerbe- und Aufsichtsangaben</h3>
+        <p>
+          <strong>Gewerbebehörde:</strong> Magistrat der Stadt Wien<br />
+          <strong>Mitgliedschaft:</strong> Wirtschaftskammer Wien <br />
+          <strong>Berufsrecht (allgemein):</strong> Gewerbeordnung (GewO) in der geltenden Fassung (sofern anwendbar)
+        </p>
 
-                <h3>Haftungsausschluss</h3>
-                <p>
-                    Die auf dieser Website bereitgestellten Inhalte dienen ausschließlich
-                    Informationszwecken im Rahmen einer Lehrveranstaltung. Es wird keine
-                    Gewähr für Richtigkeit, Vollständigkeit und Aktualität übernommen.
-                    Verweise (Links) auf externe Websites liegen außerhalb des Einflusses
-                    von HealthyPet; für deren Inhalte wird keine Verantwortung übernommen.
-                </p>
+        <h3>6. Offenlegung gemäß Mediengesetz (elektronisches Medium)</h3>
+        <p>
+          <strong>Medieninhaberin/Herausgeberin:</strong> HealthyPet GmbH, Wien (Adresse siehe oben).<br />
+          <strong>Grundlegende Richtung (Blattlinie):</strong> Information über digitale Tools für Tierhalter:innen,
+          Vorstellung der Software „HealthyPet“ und Bereitstellung eines Webshops für Software-Abonnements.<br />
+          <strong>Inhaltlich verantwortlich:</strong> David Riemer, Wien.
+        </p>
 
-                <h3>Online-Streitbeilegung</h3>
-                <p>
-                    Für einen realen Webshop wäre hier u.&nbsp;a. auf die
-                    EU-Online-Streitbeilegungsplattform hinzuweisen. Da es sich um eine
-                    Übungsseite ohne echte Verträge handelt, wird der Hinweis nur
-                    beispielhaft erwähnt.
-                </p>
-            </div>
-        </div>
-    </section>
+        <h3>7. Haftung für Inhalte und Links</h3>
+        <p>
+          Wir erstellen die Inhalte dieser Website mit angemessener Sorgfalt. Für die Richtigkeit,
+          Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.
+          Links zu externen Websites werden als Service angeboten; für deren Inhalte sind ausschließlich
+          die jeweiligen Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden
+          derartige Links nach Möglichkeit entfernt.
+        </p>
+
+        <h3>8. Urheberrecht</h3>
+        <p>
+          Sofern nicht anders angegeben, sind Inhalte (Texte, Grafiken, Logo, Audio/Jingle, Layout)
+          urheberrechtlich geschützt. Jede Verwendung außerhalb der gesetzlichen Schranken bedarf
+          der vorherigen Zustimmung der Rechteinhaberin.
+        </p>
+
+        <h3>9. Verbraucherstreitbeilegung</h3>
+        <p>
+          Wir sind nicht verpflichtet und grundsätzlich nicht bereit, an Streitbeilegungsverfahren vor
+          einer Verbraucherschlichtungsstelle teilzunehmen.
+          Verbraucher:innen können sich – je nach Fall – an geeignete Stellen wenden, z.&nbsp;B.
+          „Schlichtung für Verbrauchergeschäfte“ oder die „Internet Ombudsstelle“.
+        </p>
+
+
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer aria-label="Seitenfußbereich">
@@ -1834,6 +2231,95 @@
             });
         }
     })();
+
+
+/* === Jingle-Loader + WebAudio-Fallback === */
+  (function () {
+      const audio = document.getElementById("hp-jingle");
+      const status = document.getElementById("hp-jingle-status");
+      const fallbackBtn = document.getElementById("hp-jingle-fallback");
+
+      function setStatus(msg) {
+          if (status) status.textContent = msg;
+      }
+
+      function showFallback(msg) {
+          if (fallbackBtn) fallbackBtn.hidden = false;
+          if (msg) setStatus(msg);
+      }
+
+      // Typische Ursache: file:// statt Server
+      if (location.protocol === "file:") {
+          showFallback(
+              "Hinweis: Sie öffnen die Seite via file://. Manche Browser blockieren dann Medien. Öffnen Sie die Seite über einen lokalen Webserver (z. B. VS Code Live Server)."
+          );
+      }
+
+      if (audio) {
+          audio.addEventListener("canplay", function () {
+              setStatus("Audio-Datei geladen. Sie können den Jingle über die Player-Steuerung abspielen.");
+          });
+
+          audio.addEventListener("error", function () {
+              showFallback(
+                  "Die Audio-Datei konnte nicht geladen werden (Pfad/Dateiname/MIME/Browser). Sie können den Jingle alternativ als WebAudio-Demo abspielen."
+              );
+          });
+      } else {
+          showFallback("Audio-Element nicht gefunden. WebAudio-Demo ist verfügbar.");
+      }
+
+      function playWebAudioJingle() {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) {
+              alert("WebAudio wird von diesem Browser nicht unterstützt.");
+              return;
+          }
+
+          const ctx = new AudioContextClass();
+          const now = ctx.currentTime;
+
+          const master = ctx.createGain();
+          master.gain.setValueAtTime(0.0001, now);
+          master.connect(ctx.destination);
+
+          // Dreiton-Jingle (C5–E5–G5), kurz & freundlich
+          const freqs = [523.25, 659.25, 783.99];
+          const dur = 0.16;
+          const gap = 0.02;
+
+          freqs.forEach((f, i) => {
+              const t0 = now + i * (dur + gap);
+              const osc = ctx.createOscillator();
+              const g = ctx.createGain();
+
+              osc.type = "sine";
+              osc.frequency.setValueAtTime(f, t0);
+
+              // weiche Hüllkurve (kein Knacken)
+              g.gain.setValueAtTime(0.0001, t0);
+              g.gain.exponentialRampToValueAtTime(0.25, t0 + 0.02);
+              g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+              osc.connect(g);
+              g.connect(master);
+
+              osc.start(t0);
+              osc.stop(t0 + dur + 0.01);
+          });
+
+          // Context nach kurzer Zeit schließen
+          setTimeout(() => {
+              ctx.close().catch(() => {});
+          }, 1200);
+      }
+
+      if (fallbackBtn) {
+          fallbackBtn.addEventListener("click", playWebAudioJingle);
+      }
+  })();
+
+
 </script>
 </body>
 </html>
