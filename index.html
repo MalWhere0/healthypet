@@ -6,7 +6,9 @@
     <title>HealthyPet – KI-gestützte Tiergesundheit (Demo-Webshop)</title>
     <meta name="description" content="HealthyPet ist eine KI-gestützte Software, mit der Tierhalter Krankheitsdaten und Verhaltensmuster ihrer Tiere analysieren lassen können – inklusive Behandlungsempfehlungen. Demo-Webshop für ein Abo-Modell." />
     <meta name="theme-color" content="#0f172a" />
-    <meta name="accessibility" content="Demo einer teilweise barrierefreien Website, orientiert an WCAG 2.2 AA, WZG und BaFG." />
+
+    <meta name="accessibility" content="WCAG 2.2 AA konforme Demo-Website. Barrierefreiheitserklärung im Abschnitt #accessibility." />
+
     <meta name="robots" content="noindex, nofollow" />
 
     <style>
@@ -17,7 +19,7 @@
             --color-bg: #f9fafb;
             --color-bg-alt: #e5f3f1;
             --color-text: #0f172a;
-            --color-muted: #6b7280;
+            --color-muted: #4b5563;
             --radius-lg: 1rem;
             --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
             --max-width: 1100px;
@@ -792,6 +794,15 @@
         }
 
 
+        @media (prefers-reduced-motion: reduce) {
+          html { scroll-behavior: auto; }
+          *, *::before, *::after {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+          }
+        }
+
 
 
     </style>
@@ -911,22 +922,42 @@
                           <a href="https://commons.wikimedia.org/wiki/File:Cat_greeting_its_owner_(Unsplash).jpg"
                              target="_blank" rel="license noopener noreferrer">Wikimedia Commons</a>
                         </figcaption>
-                      </figure>
+                        <figure class="hero-media-item" style="margin:0;">
+                          <video
+                            controls
+                            playsinline
+                            preload="metadata"
+                            aria-label="Video: spielende Welpen"
+                            aria-describedby="puppies-desc"
+                          >
+                            <source
+                              src="https://commons.wikimedia.org/wiki/Special:FilePath/Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
+                              type="video/webm"
+                            />
 
-                      <figure class="hero-media-item" style="margin:0;">
-                        <video controls playsinline preload="metadata" aria-label="Video: spielende Welpen">
-                          <source
-                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
-                            type="video/webm"
-                          />
-                          Ihr Browser unterstützt das Video-Element nicht.
-                        </video>
-                        <figcaption>
-                          Video (CC BY-SA 3.0): Tim Sweet –
-                          <a href="https://commons.wikimedia.org/wiki/File:Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
-                             target="_blank" rel="license noopener noreferrer">Wikimedia Commons</a>
-                        </figcaption>
-                      </figure>
+                            <!-- Untertitel inline (ohne externe Datei) -->
+                            <track
+                              kind="captions"
+                              srclang="de"
+                              label="Deutsch"
+                              default
+                              src="data:text/vtt;charset=utf-8,WEBVTT%0A%0A00:00:00.000%20--%3E%2000:00:04.000%0A%5BWelpen%20spielen%20in%20Zeitlupe%5D%0A%0A00:00:04.000%20--%3E%2000:00:08.000%0A%5BDie%20Welpen%20laufen%20einander%20nach%5D%0A%0A00:00:08.000%20--%3E%2000:00:12.000%0A%5BSpielerisches%20Raufen%2C%20keine%20gesprochenen%20Inhalte%5D%0A"
+                            />
+
+                            Ihr Browser unterstützt das Video-Element nicht.
+                          </video>
+
+                          <figcaption>
+                            <span id="puppies-desc">
+                              Textalternative: Das Video zeigt spielende Welpen in Zeitlupe (keine für das Verständnis notwendigen gesprochenen Inhalte).
+                            </span>
+                            <br />
+                            Video (CC BY-SA 3.0): Tim Sweet –
+                            <a href="https://commons.wikimedia.org/wiki/File:Goldendoodle_and_Black_Lab_puppies_playing_in_slow_motion.webm"
+                               target="_blank" rel="license noopener noreferrer">Wikimedia Commons</a>
+                          </figcaption>
+                        </figure>
+
                     </div>
 
                     <div class="hero-actions">
@@ -1780,7 +1811,7 @@
 
         <h3>14. Stand dieser Datenschutzerklärung</h3>
         <p>
-          Stand: <strong>Dezember 2025</strong>.
+          Stand: <strong>Januar 2026</strong>.
         </p>
       </div>
     </div>
@@ -1788,114 +1819,73 @@
 
 
     <!-- Barrierefreiheitserklärung / Aufgabe 1 -->
-    <section id="accessibility" class="section" aria-labelledby="accessibility-heading">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">Aufgabe 1 · Barrierefreiheit</span>
-                <h2 id="accessibility-heading">Barrierefreiheitserklärung</h2>
-                <p>
-                    HealthyPet ist bestrebt, diese Website im Einklang mit den Richtlinien
-                    für barrierefreie Webinhalte (WCAG) 2.2 auf Konformitätsstufe AA
-                    zugänglich zu machen. Die Struktur der Erklärung orientiert sich an den
-                    Vorgaben des österreichischen Web-Zugänglichkeits-Gesetzes (WZG) für
-                    Barrierefreiheitserklärungen.
-                </p>
-            </div>
+    <!-- Erklärung zur Barrierefreiheit / Aufgabe 1 -->
+<section id="accessibility" class="section" aria-labelledby="accessibility-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge">Aufgabe 1 · Barrierefreiheit</span>
+      <h2 id="accessibility-heading">Erklärung zur Barrierefreiheit</h2>
+      <p>
+        HealthyPet GmbH ist bemüht, diese Website barrierefrei zugänglich zu machen.
+        Diese Erklärung zur Barrierefreiheit gilt für den Demo-Webshop
+        <strong>healthypet.example</strong>.
+      </p>
+    </div>
 
-            <div class="legal-text">
-                <h3>1. Einleitung</h3>
-                <p>
-                    Diese Erklärung zur Barrierefreiheit gilt für den Demo-Webshop
-                    <strong>healthypet.example</strong>. Als fiktives privates Unternehmen
-                    orientiert sich HealthyPet freiwillig an den Anforderungen der WCAG
-                    2.2 AA sowie an den in Österreich relevanten Regelungen (WZG und BaFG),
-                    soweit diese auf vergleichbare Dienste anwendbar sind.
-                </p>
+    <div class="legal-text">
+      <h3>Standards und Rechtsrahmen</h3>
+      <p>
+        Für die technische Bewertung orientieren wir uns an den
+        <strong>Web Content Accessibility Guidelines (WCAG) 2.2</strong> auf
+        <strong>Konformitätsstufe AA</strong>.
+      </p>
 
-                <h3>2. Stand der Vereinbarkeit mit WCAG 2.2 AA</h3>
-                <p>
-                    Diese Website ist nach unserem Kenntnisstand
-                    <span class="status-partial">teilweise barrierefrei</span>. Die
-                    folgenden Anforderungen werden bereits weitgehend erfüllt:
-                </p>
-                <ul class="legal-list">
-                    <li>Semantische Strukturierung mit &lt;header&gt;, &lt;main&gt;, &lt;footer&gt;.</li>
-                    <li>Verwendung logischer Überschriftenhierarchien (&lt;h1&gt;–&lt;h3&gt;).</li>
-                    <li>Alternative Texte für informative Bilder und Medien.</li>
-                    <li>Sichtbare Fokusindikatoren für fokussierbare Elemente.</li>
-                    <li>Ausreichende Farbkontraste für Text und Bedienelemente.</li>
-                    <li>
-                        Tastaturbedienbarkeit aller wesentlichen Funktionen (Navigation,
-                        Buttons, Formulare).
-                    </li>
-                    <li>Responsives Layout, das bis 200&nbsp;% Zoom nutzbar bleibt.</li>
-                </ul>
+      <h3>Stand der Vereinbarkeit mit den Anforderungen</h3>
+      <p>
+        Diese Website ist nach aktuellem Stand
+        <span class="status-ok">WCAG 2.2 – Konformitätsstufe AA konform</span>.
+      </p>
 
-                <h3>3. Nicht barrierefreie Inhalte / bekannte Einschränkungen</h3>
-                <p>Folgende Punkte sind uns derzeit als Einschränkungen bekannt:</p>
-                <ul class="legal-list">
-                    <li>
-                        Die fiktiven Video- und Audioelemente enthalten keine echten
-                        Untertitel oder Audiobeschreibungen.
-                    </li>
-                    <li>
-                        Externe Inhalte (z.&nbsp;B. echte Analyse-Tools) werden aus
-                        didaktischen Gründen nicht eingebunden; mögliche Barrieren solcher
-                        Drittinhalte werden daher hier nicht abgebildet.
-                    </li>
-                    <li>
-                        Die Texte verwenden teilweise Fachbegriffe (z.&nbsp;B. „DSGVO“,
-                        „WCAG“), die nicht durchgängig in Leichter Sprache erläutert sind.
-                    </li>
-                </ul>
+      <h3>Nicht barrierefreie Inhalte</h3>
+      <p>
+        Derzeit sind uns <strong>keine</strong> nicht barrierefreien Inhalte bekannt.
+        Sollten Sie dennoch auf eine Barriere stoßen, freuen wir uns über Ihren Hinweis (siehe „Feedback und Kontakt“).
+      </p>
 
-                <h3>4. Erstellung dieser Erklärung</h3>
-                <p>
-                    Diese Erklärung wurde am <strong>01.03.2025</strong> erstellt und zuletzt
-                    am <strong>01.03.2025</strong> überprüft. Die Bewertung der Website
-                    erfolgte durch eine <strong>Selbstbewertung</strong> mit folgenden
-                    Methoden:
-                </p>
-                <ul class="legal-list">
-                    <li>Manuelle Tastaturtests (Tab-Reihenfolge, Fokus-Indikator).</li>
-                    <li>Überprüfung der Struktur mit Browser-Developer-Tools.</li>
-                    <li>
-                        Stichprobenartige Tests mit automatisierten Tools
-                        (z.&nbsp;B. WAVE, axe, Lighthouse) zur Erkennung typischer Probleme
-                        wie fehlende Alternativtexte oder Kontrastfehler.
-                    </li>
-                </ul>
+      <h3>Erstellung dieser Erklärung</h3>
+      <p>
+        Diese Erklärung wurde am <strong>07.01.2026</strong> erstellt und zuletzt am
+        <strong>07.01.2026</strong> überprüft.
+        Die Bewertung erfolgte im Rahmen einer <strong>Selbstbewertung</strong> durch:
+      </p>
+      <ul class="legal-list">
+        <li>manuelle Tests (Tastaturbedienung, Fokusführung, Zoom/Responsive Verhalten, Formulare)</li>
+        <li>automatisierte Tests (WAVE, axe DevTools, Lighthouse – Accessibility)</li>
+      </ul>
 
-                <h3>5. Feedback-Mechanismus</h3>
-                <p>
-                    Sollten Ihnen Barrieren auf dieser Website auffallen, kontaktieren Sie
-                    uns bitte. Wir sind bemüht, etwaige Mängel im Rahmen dieser Übung
-                    nachvollziehbar zu dokumentieren und – soweit möglich – zu beheben.
-                </p>
-                <p>
-                    E-Mail: <a href="mailto:accessibility@healthypet.example">accessibility@healthypet.example</a><br />
-                    Betreff: „Barrierefreiheit HealthyPet-Webshop“
-                </p>
-                <p>
-                    Wir bemühen uns, innerhalb von zwei Monaten auf entsprechende Hinweise
-                    zu reagieren.
-                </p>
+      <h3>Feedback und Kontakt</h3>
+      <p>
+        Wenn Ihnen Mängel in Bezug auf die barrierefreie Nutzbarkeit auffallen, kontaktieren Sie uns bitte.
+        Wir prüfen Ihr Anliegen und melden uns ehestmöglich zurück.
+      </p>
+      <p>
+        E-Mail: <a href="mailto:accessibility@healthypet.example">accessibility@healthypet.example</a><br />
+        Betreff: „Barrierefreiheit – HealthyPet“
+      </p>
 
-                <h3>6. Durchsetzungsverfahren</h3>
-                <p>
-                    In einem realen Produkt müssten hier die zuständigen Stellen für das
-                    Durchsetzungsverfahren (z.&nbsp;B. nationale Schlichtungsstelle /
-                    Beschwerdestelle) konkret genannt und verlinkt werden. Da es sich um
-                    eine Übungsseite handelt, wird dieser Teil nur inhaltlich angedeutet.
-                </p>
-                <p>
-                    Die Erklärung zur Barrierefreiheit ist über den Link „Barrierefreiheit“
-                    in der dauerhaft sichtbaren Fußzeile von jeder Unterseite aus
-                    erreichbar.
-                </p>
-            </div>
-        </div>
-    </section>
+      <h3>Durchsetzung / Beschwerdemöglichkeit (Hinweis)</h3>
+      <p>
+        Sofern eine Dienstleistung in den Anwendungsbereich des <strong>BaFG</strong> fällt, können Hinweise auch an die
+        Marktüberwachung für digitale Barrierefreiheit gerichtet werden (Sozialministeriumservice).
+      </p>
+
+      <p class="nice-classes" style="margin-top:1rem;">
+        Diese Erklärung ist über den Link „Barrierefreiheit“ im Footer von jeder Seite erreichbar.
+      </p>
+    </div>
+  </div>
+</section>
+
 
     <!-- Aufgabe 2 Urheberrecht/Medienarten !-->
     <section id="media-licenses" class="section" aria-labelledby="media-heading">
